@@ -139,3 +139,4 @@ if __name__ == "__main__":
     # Генерация шапок для всех ответчиков
     generate_multiple_headers(respondents)
 
+
