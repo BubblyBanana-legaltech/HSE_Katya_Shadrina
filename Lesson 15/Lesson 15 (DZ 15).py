@@ -20,7 +20,7 @@ logging.basicConfig(
 # Состояния диалога
 NAME, AGE, FAVORITE_LANGUAGE = range(3)
 
-# Замените на ваш токен от @BotFather
+#  токен
 BOT_TOKEN = "8218444184:AAGnzZHcwePYqWc1VlCnL5rWJa10-LXjdh4"
 
 # Путь к базе данных
