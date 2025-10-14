@@ -1,6 +1,12 @@
 import logging
+import os
+from dotenv import load_dotenv
+
 from telegram import ReplyKeyboardMarkup, KeyboardButton, Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+
+# Загружаем переменные окружения из файла .env
+load_dotenv()
 
 # Включаем логирование
 logging.basicConfig(
@@ -8,8 +14,10 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-# Токен бота
-BOT_TOKEN = "8254217509:AAHKHJuH9jpG1C-CMm0ramceGosxEkgM6-Q"
+# Получаем токен бота из переменной окружения
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("❌ Токен бота не найден! Убедитесь, что он указан в файле .env")
 
 # Определим кнопки меню
 MAIN_MENU_BUTTONS = [
@@ -115,7 +123,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    print("Бот запущен...")
+    print("✅ Бот запущен...")
     application.run_polling()
 
 if __name__ == "__main__":
