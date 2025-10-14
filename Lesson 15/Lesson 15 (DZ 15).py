@@ -1,6 +1,9 @@
 import sqlite3
 import logging
+import os
 from datetime import datetime
+from dotenv import load_dotenv
+
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import (
     Application,
@@ -11,6 +14,9 @@ from telegram.ext import (
     filters,
 )
 
+# Загружаем переменные окружения из .env
+load_dotenv()
+
 # Логирование
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -20,8 +26,10 @@ logging.basicConfig(
 # Состояния диалога
 NAME, AGE, FAVORITE_LANGUAGE = range(3)
 
-#  токен
-BOT_TOKEN = "8218444184:AAGnzZHcwePYqWc1VlCnL5rWJa10-LXjdh4"
+# Получаем токен из переменной окружения
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("❌ Токен бота не найден! Убедитесь, что он указан в файле .env")
 
 # Путь к базе данных
 DB_PATH = "survey.db"
@@ -132,4 +140,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
